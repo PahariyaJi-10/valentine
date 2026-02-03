@@ -1,1 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Valentine Proposal ❤️</title>
+  <style>
+    body {
+      font-family: "Arial", sans-serif;
+      background: #ffe6e6;
+      text-align: center;
+      padding-top: 80px;
+    }
+    h1 { font-size: 3rem; color: #d6336c; }
+    button {
+      font-size: 1.5rem;
+      padding: 10px 20px;
+      margin: 15px;
+      cursor: pointer;
+      border: none;
+      color: white;
+      background: #e63946;
+      border-radius: 8px;
+      transition: 0.2s ease;
+    }
+    button:hover { background: #c4273e; }
+    #yesBtn { background: #fc4f4f; }
+    #result { display: none; font-size: 2rem; color: #6a1b4d; margin-top: 40px; }
+  </style>
+</head>
+<body>
 
+  <h1 id="message">Hey Divyansh — will you be my Valentine? 💌</h1>
+
+  <button id="yesBtn">Yes ❤️</button>
+  <button id="noBtn">No 😢</button>
+
+  <div id="result"></div>
+
+  <script>
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const result = document.getElementById("result");
+
+    noBtn.addEventListener("mouseover", () => {
+      noBtn.style.position = "relative";
+      noBtn.style.left = Math.random() * 200 - 100 + "px";
+      noBtn.style.top = Math.random() * 100 - 50 + "px";
+    });
+
+    yesBtn.addEventListener("click", () => {
+      result.textContent = "YAY! 🥳 You just made my Valentine’s Day!";
+      yesBtn.style.display = "none";
+      noBtn.style.display = "none";
+    });
+  </script>
+
+</body>
+</html>
