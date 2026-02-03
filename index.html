@@ -1,40 +1,117 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Valentine Proposal ❤️</title>
+
   <style>
     body {
-      font-family: "Arial", sans-serif;
-      background: #ffe6e6;
+      margin: 0;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      background: #ffecec;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       text-align: center;
-      padding-top: 80px;
+      overflow: hidden;
     }
-    h1 { font-size: 3rem; color: #d6336c; }
+
+    h1 {
+      color: #e6396f;
+      font-size: 48px;
+      margin-bottom: 40px;
+      animation: fadeIn 1.2s ease;
+    }
+
+    .buttons {
+      margin-top: 20px;
+    }
+
     button {
-      font-size: 1.5rem;
-      padding: 10px 20px;
-      margin: 15px;
-      cursor: pointer;
+      font-size: 22px;
+      padding: 12px 28px;
+      margin: 10px;
       border: none;
+      border-radius: 10px;
+      cursor: pointer;
       color: white;
-      background: #e63946;
-      border-radius: 8px;
-      transition: 0.2s ease;
+      transition: transform 0.2s ease;
     }
-    button:hover { background: #c4273e; }
-    #yesBtn { background: #fc4f4f; }
-    #result { display: none; font-size: 2rem; color: #6a1b4d; margin-top: 40px; }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    #yesBtn {
+      background-color: #ff4d6d;
+    }
+
+    #noBtn {
+      background-color: #e63946;
+      position: relative;
+    }
+
+    #result {
+      display: none;
+      margin-top: 40px;
+      font-size: 36px;
+      color: #b5179e;
+      line-height: 1.4;
+      animation: popIn 0.8s ease forwards;
+    }
+
+    /* Animations */
+    @keyframes popIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.6);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      font-size: 24px;
+      animation: floatUp 4s linear forwards;
+      color: #ff4d6d;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateX(0) translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(-30px) translateY(-600px);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
+
 <body>
 
-  <h1 id="message">Hey Divyansh — will you be my Valentine? 💌</h1>
+  <div>
+    <h1>Hey Divyansh — will you be my Valentine? 💌</h1>
 
-  <button id="yesBtn">Yes ❤️</button>
-  <button id="noBtn">No 😢</button>
+    <div class="buttons">
+      <button id="yesBtn">Yes 💗</button>
+      <button id="noBtn">No 😢</button>
+    </div>
 
-  <div id="result"></div>
+    <div id="result"></div>
+  </div>
 
   <script>
     const yesBtn = document.getElementById("yesBtn");
@@ -42,16 +119,37 @@
     const result = document.getElementById("result");
 
     noBtn.addEventListener("mouseover", () => {
-      noBtn.style.position = "relative";
       noBtn.style.left = Math.random() * 200 - 100 + "px";
       noBtn.style.top = Math.random() * 100 - 50 + "px";
     });
 
     yesBtn.addEventListener("click", () => {
-      result.textContent = "YAY! 🥳 You just made my Valentine’s Day!";
+      result.innerHTML = "I knew it 😌💖<br>See you on Valentine’s Day!";
+      result.style.display = "block";
+
       yesBtn.style.display = "none";
       noBtn.style.display = "none";
+
+      document.body.style.background =
+        "linear-gradient(135deg, #ffd6e8, #ffe6f0)";
+
+      startHearts();
     });
+
+    function startHearts() {
+      for (let i = 0; i < 25; i++) {
+        setTimeout(() => {
+          const heart = document.createElement("div");
+          heart.className = "heart";
+          heart.innerText = "❤️";
+          heart.style.left = Math.random() * 100 + "vw";
+          heart.style.fontSize = Math.random() * 20 + 20 + "px";
+          document.body.appendChild(heart);
+
+          setTimeout(() => heart.remove(), 4000);
+        }, i * 150);
+      }
+    }
   </script>
 
 </body>
