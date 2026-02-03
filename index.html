@@ -14,14 +14,13 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      overflow: hidden;
+      transition: background 0.6s ease;
     }
 
     h1 {
       color: #e6396f;
       font-size: 48px;
       margin-bottom: 40px;
-      animation: fadeIn 1.2s ease;
     }
 
     .buttons {
@@ -52,50 +51,16 @@
       position: relative;
     }
 
+    /* RESULT WITH ANIMATION */
     #result {
       display: none;
       margin-top: 40px;
       font-size: 36px;
       color: #b5179e;
       line-height: 1.4;
-      animation: popIn 0.8s ease forwards;
-    }
-
-    /* Animations */
-    @keyframes popIn {
-      0% {
-        opacity: 0;
-        transform: scale(0.6);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    /* Floating hearts */
-    .heart {
-      position: absolute;
-      bottom: -20px;
-      font-size: 24px;
-      animation: floatUp 4s linear forwards;
-      color: #ff4d6d;
-    }
-
-    @keyframes floatUp {
-      0% {
-        transform: translateX(0) translateY(0);
-        opacity: 1;
-      }
-      100% {
-        transform: translateX(-30px) translateY(-600px);
-        opacity: 0;
-      }
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all 0.6s ease;
     }
   </style>
 </head>
@@ -118,38 +83,29 @@
     const noBtn = document.getElementById("noBtn");
     const result = document.getElementById("result");
 
+    // Make NO button run away
     noBtn.addEventListener("mouseover", () => {
       noBtn.style.left = Math.random() * 200 - 100 + "px";
       noBtn.style.top = Math.random() * 100 - 50 + "px";
     });
 
+    // YES button logic
     yesBtn.addEventListener("click", () => {
       result.innerHTML = "I knew it 😌💖<br>See you on Valentine’s Day!";
       result.style.display = "block";
+
+      // trigger animation AFTER display
+      setTimeout(() => {
+        result.style.opacity = "1";
+        result.style.transform = "scale(1)";
+      }, 50);
 
       yesBtn.style.display = "none";
       noBtn.style.display = "none";
 
       document.body.style.background =
         "linear-gradient(135deg, #ffd6e8, #ffe6f0)";
-
-      startHearts();
     });
-
-    function startHearts() {
-      for (let i = 0; i < 25; i++) {
-        setTimeout(() => {
-          const heart = document.createElement("div");
-          heart.className = "heart";
-          heart.innerText = "❤️";
-          heart.style.left = Math.random() * 100 + "vw";
-          heart.style.fontSize = Math.random() * 20 + 20 + "px";
-          document.body.appendChild(heart);
-
-          setTimeout(() => heart.remove(), 4000);
-        }, i * 150);
-      }
-    }
   </script>
 
 </body>
